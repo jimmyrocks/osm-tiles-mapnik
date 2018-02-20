@@ -18,6 +18,7 @@ docker-compose exec tools bash /scripts/download_shapefiles.sh
 
 echo "Setting up the renderd service"
 docker-compose exec tileserver a2enconf mod_tile
+docker-compose exec tileserver service apache2 start
 docker-compose exec tileserver service apache2 reload
 docker-compose exec tileserver service apache2 reload
 
