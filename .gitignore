@@ -1,2 +1,3 @@
 ./tools/mnt
 ./postgres/data
+*.swp
