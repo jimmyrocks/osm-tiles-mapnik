@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+  tools:
+    build:
+      context: ./tools
+      dockerfile: ./Dockerfile
+    env_file:
+      - tileserver.env
+    links:
+      - postgres
+    volumes:
+      - ./tools/mnt:/mnt
+      - ./tools/scripts:/scripts
+    tty: true
+    # command:
+      # - /scripts/start.sh
+
+  postgres:
+    restart: always
+    image: mdillon/postgis:10
+    env_file:
+      - tileserver.env
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres/scripts:/docker-entrypoint-initdb.d
+      - ./postgres/data:/var/lib/postgresql/data
+
+  tileserver:
+    restart: always
+    build:
+      context: ./tileserver
+      dockerfile: ./Dockerfile
+    env_file:
+      - tileserver.env
+    links:
+      - postgres
+    ports:
+      - 3000:80
+    # command: service apache2 start
+    tty: true
+    volumes:
+      - ./tools/mnt:/mnt
+      - ./tileserver/configs/renderd.conf:/usr/local/etc/renderd.conf
+      - ./tileserver/configs/mod_tile.conf:/etc/apache2/conf-available/mod_tile.conf
+      - ./tileserver/site:/var/www/html
