@@ -9,7 +9,7 @@ RUN apt-get update -qq && \
       git \
       lsb-release \
       mapnik-utils \
-      nodejs-legacy \
+      nodejs \
       npm \
       osm2pgsql \
       wget \
@@ -23,6 +23,11 @@ RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends \
       postgresql-client-10 \
     && rm -rf /var/lib/apt/lists/*
+
+# Install the latest stable version of nodejs
+RUN npm install -g n && \
+    n stable && \
+    ln -sf $(n bin stable) /usr/bin/node
 
 RUN mkdir -p /src && \
     mkdir -p /mnt && \
