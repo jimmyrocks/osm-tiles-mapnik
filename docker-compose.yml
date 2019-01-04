@@ -22,8 +22,6 @@ services:
     image: mdillon/postgis:10
     env_file:
       - tileserver.env
-    ports:
-      - 5432:5432
     volumes:
       - ./postgres/scripts:/docker-entrypoint-initdb.d
       - ./postgres/data:/var/lib/postgresql/data
