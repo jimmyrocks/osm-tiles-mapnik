@@ -29,7 +29,7 @@ This should be quite simple to start with docker-compose, although it may take a
  
 1. Find a [.pbf](https://wiki.openstreetmap.org/wiki/PBF_Format) file available for download, possibly from [Geofabrik](http://download.geofabrik.de/).
 2. Edit the "tileserver.env" file, change the "SAMPLE_DATASET_URL" variable to the URL for your selected PBF file.
-3. Edit the file at "tileserver/site/index.html", and find the Javascript variables "center" and "zoom". Replace these values with values that are relevant to your PDF file.
+3. Edit the file at "tileserver/site/index.html", and find the Javascript variables "center" and "zoom". Replace these values with values that are relevant to your PBF file.
 
 ## Background
 This project includes a docker-compose.yml file that pulls together three Dockerfiles:
